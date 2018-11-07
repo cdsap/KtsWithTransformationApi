@@ -33,18 +33,6 @@ class AnnotationsChecker : Transform() {
     override fun transform(transformInvocation: TransformInvocation?) {
         transformInvocation?.inputs?.forEach {
             it.directoryInputs.forEach {
-                println("directory $it")
-
-
-                val fileName = it.file.absolutePath
-                println("fileName $fileName")
-                val dir = File(fileName)
-                println("dir $dir")
-
-                dir.walkTopDown().filter {
-                    it.name.contains("ssTest")
-                }
-                println("2222")
 
                 val dest = transformInvocation.outputProvider.getContentLocation(
                     it.name,
@@ -52,46 +40,9 @@ class AnnotationsChecker : Transform() {
                     it.scopes,
                     Format.DIRECTORY
                 )
-                FileUtils.copyDirectory(dir, dest)
+                FileUtils.copyDirectory(it.file, dest)
 
-                //  dest.deleteRecursively()
-                //  dest.mkdirs()
-//                println("dldlldldlddll")
-//                val pathBitLen = it.file.toString().length
-//                it.file.walkTopDown().forEach {
-//
-//                    val path = it.toString().substring(pathBitLen)
-//                    if (it.isDirectory()) {
-//                        // File(dest, path).mkdirs()
-//                    } else {
-//                        println(path)
-//                        println(dest.absolutePath)
-//                        FileUtils.copyFile(it, dest)
-//                        // File(dest,path)
-//
-//                    }
-//                    it.file.traverse {
-//                        def path = "${it.toString().substring(pathBitLen)}"
-//                        if (it.isDirectory()) {
-//                            new File (outDir, path).mkdirs()
-//                        } else {
-//                            if (!path.endsWith("BuildConfig.class")) {
-//                                new File (outDir, path).bytes = it.bytes
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            it.file.walkTopDown().forEach {
-//                println(it.name)
-//                FileUtils.copyDirectory(it, dest)
-//            }
-                //    .map {
-                //        println("xxxxxXxxx")
-                //        FileUtils.copyDirectory(it, dest)
-                //   }
-//
-                //              }
+
             }
 
             it.jarInputs.forEach {
@@ -106,55 +57,5 @@ class AnnotationsChecker : Transform() {
             }
         }
 
-//        transformInvocation?.inputs?.forEach {
-//
-//            println("$it")
-//            it.directoryInputs.forEach {
-//                println("$it")
-//                it.file.walkTopDown().forEach {
-//                    // if (it.name.contains("2Test")) {
-//                    if (it.isFile && it.name.contains("Test")) {
-//                        println("Test -- > " + it.toString())
-//                        val string = it.toString().split("debugAndroidTest/")
-//                        val file =
-//                            File("/Users/ivillar/testMarathon/MyApplication/app/build/tmp/kotlin-classes/debugAndroidTest/")
-//                        val url = file.toURI().toURL()
-//                        var urls = arrayOf(url)
-//                        val classLoader = URLClassLoader(urls)
-//                        val finalName = string[1].replace("/", ".").split(".class")
-//                        val classAfter = classLoader.loadClass(finalName[0])
-//                        classAfter.declaredMethods.asList().forEach {
-//                            println("Method -- > " + it)
-//                        }
-//                        classAfter.annotations.asList().forEach {
-//                            println("annotation -- > " + it)
-//                        }
-//
-//                    }
-//                    //   }
-//                }
-//              //  super.transform(transformInvocation)
-//            }
-//        }
-        //   super.transform(transformInvocation)
-    }
-
-    private fun scanDirectory(ca: List<File>) {
-        ca.forEach {
-            val isDirectory: Boolean = it.isDirectory
-            if (isDirectory) {
-                scanDirectory(it.listFiles().asList())
-            } else {
-                //  println(it.path)
-                if (it.name.contains("Test")) {
-                    println("Test -- > " + it.toString())
-                    it.javaClass.annotations.forEach {
-                        if (mode.equals("prTests") && it.annotationClass.simpleName.equals("ChinaTest"))
-
-                            println(it.toString())
-                    }
-                }
-            }
-        }
     }
 }
