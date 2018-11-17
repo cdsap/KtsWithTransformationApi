@@ -39,12 +39,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
 }
 
-configurations.all {
-    resolutionStrategy {
-        force("org.codehaus.groovy:groovy-all:2.4.15")
-    }
-}
-
 gradlePlugin {
     repositories {
         google()
@@ -57,9 +51,6 @@ gradlePlugin {
         implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         implementation("com.malinskiy.marathon:marathon-gradle-plugin:0.2.2-SNAPSHOT")
         implementation("net.bytebuddy:byte-buddy:1.9.2")
-    //    implementation("net.bytebuddy:byte-buddy:1.9.2")
-    //    : 'org.ow2.asm', name: 'asm', version: '5.0.3'
-
     }
 
 

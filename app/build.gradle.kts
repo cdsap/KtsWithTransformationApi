@@ -40,14 +40,6 @@ marathon {
     name = "test"
     ignoreFailures = true
     fallbackToScreenshots = false
-//    analytics {
-//        influx {
-//            url = "https://influxdb.default.svc.agoda.mobi"
-//            user = ""
-//            password = ""
-//            dbName = "marathonTest"
-//        }
-//    }
     batchingStrategy {
         fixedSize {
             size = 10
